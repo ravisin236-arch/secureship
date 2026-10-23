@@ -1,0 +1,22 @@
+# Secrets - never commit
+.env
+
+# Java
+api/target/
+*.iml
+.idea/
+
+# Python
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+
+# Terraform (added in week 3)
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Editors / OS
+.vscode/
+.DS_Store

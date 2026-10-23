@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: secureship-api
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/secureship}
+    username: ${SPRING_DATASOURCE_USERNAME:secureship}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      properties:
+        enable.idempotence: true
+        # Plain JSON so the Python worker can read it without Java type headers
+        spring.json.add.type.headers: false
+
+# Expose only health and info - never env, beans, or heapdump
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+server:
+  error:
+    include-stacktrace: never
